@@ -1,1 +1,6 @@
 mods-*
+*.conf
+conf.d/*
+envvars
+magic
+
