@@ -1,0 +1,38 @@
+server {
+        set $www_root "/home/phpmyadmin/www/htdocs";
+        server_name server.example.com;
+        listen   server.example.com:443;
+
+	#set $www_host "ssl.example.com";
+	#proxy_set_header  Host $www_host;
+
+	ssl on;
+	ssl_certificate /etc/ssl/certs/ssl-cert-snakeoil.pem;
+	ssl_certificate_key /etc/ssl/private/ssl-cert-snakeoil.key;
+	ssl_session_cache shared:SSL:10m;
+
+	location /scripts {
+		internal;
+	}
+
+	location /libraries {
+		internal;
+	}
+
+	location ~ /\.(ht|svn|git) {
+		internal;
+	}
+
+	location ~* \.php$ {
+		proxy_pass    http://apache;
+	}
+
+	location / {
+		expires     60d;
+		root $www_root;
+		if (!-f $request_filename) {
+			proxy_pass    http://apache;
+		}
+	}
+}
+
