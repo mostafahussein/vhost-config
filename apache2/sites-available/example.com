@@ -1,0 +1,38 @@
+<VirtualHost *:80>
+	ServerName www.example.com
+	ServerAlias test.example.com
+	ServerAdmin admin@example.com
+
+	DocumentRoot /home/example.com/www/htdocs/
+	<Directory /home/example.com/www/htdocs/>
+		Options Indexes FollowSymLinks MultiViews
+		AllowOverride All
+		Order allow,deny
+		allow from all
+	</Directory>
+
+	# debug, info, notice, warn, error, crit, alert, emerg
+	LogLevel warn
+
+	ErrorLog /home/example.com/www/logs/error.log
+	CustomLog /home/example.com/www/logs/access.log combined
+
+	<IfModule itk.c>
+		AssignUserID example.com example.com
+		MaxClientsVHost 10
+	</IfModule>
+
+	php_admin_value session.name "sid"
+	php_admin_value post_max_size "8M"
+	php_admin_value upload_max_filesize "8M"
+	php_admin_value session.use_only_cookies "1"
+	php_admin_value session.gc_maxlifetime "86400"
+	php_admin_value session.cookie_lifetime "86400"
+	php_admin_value session.hash_function "1"
+	php_admin_value session.hash_bits_per_character "6"
+#	php_value date.timezone 'Europe/Moscow'
+#	php_value date.timezone 'Asia/Vladivostok'
+	php_value date.timezone 'Asia/Tokyo'
+
+</VirtualHost>
+

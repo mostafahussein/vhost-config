@@ -1,0 +1,28 @@
+<VirtualHost *:80>
+	ServerName server.example.com
+	ServerAlias ssl.example.com
+	ServerAdmin admin@example.com
+
+	DocumentRoot /home/phpmyadmin/www/htdocs/
+	<Directory /home/phpmyadmin/www/htdocs/>
+		Options Indexes FollowSymLinks MultiViews
+		AllowOverride None
+		Order allow,deny
+		allow from all
+	</Directory>
+
+	LogLevel warn
+	ErrorLog /home/phpmyadmin/www/logs/error.log
+	CustomLog /home/phpmyadmin/www/logs/access.log combined
+
+	<IfModule itk.c>
+		AssignUserID phpmyadmin phpmyadmin
+		MaxClientsVHost 10
+	</IfModule>
+
+	SetEnv HTTPS on
+
+	php_admin_value post_max_size "80M"
+	php_admin_value upload_max_filesize "80M"
+	php_admin_value session.gc_maxlifetime "14400"
+</VirtualHost>
