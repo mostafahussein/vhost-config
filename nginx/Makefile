@@ -8,3 +8,4 @@ phpmyadmin:
 
 default:
 	sed -i s/server.example.com/$(HOSTNAME)/g conf.d/default.conf
+	rm sites-enabled/default
