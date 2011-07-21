@@ -10,6 +10,7 @@ server {
 	ssl_certificate /etc/ssl/certs/ssl-cert-snakeoil.pem;
 	ssl_certificate_key /etc/ssl/private/ssl-cert-snakeoil.key;
 	ssl_session_cache shared:SSL:10m;
+	ssl_ciphers ALL:!ADH:!kEDH:RC4+RSA:+HIGH:+MEDIUM;
 
 	location /scripts {
 		internal;
