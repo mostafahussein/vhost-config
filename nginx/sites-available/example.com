@@ -49,6 +49,7 @@ server {
         server_name .example.com;
         listen      www.example.com:80;
         location / {
+		expires max;
                 rewrite  ^(.*)$  http://www.example.com$1  permanent;
         }
 }
