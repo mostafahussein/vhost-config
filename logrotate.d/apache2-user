@@ -1,0 +1,15 @@
+/home/*/www/logs/*log {
+    weekly
+    rotate 52
+    delaycompress
+    nocreate
+    missingok
+    notifempty
+    size 1M
+    sharedscripts
+    postrotate
+        /etc/init.d/apache2 reload > /dev/null
+    endscript
+    #mail archived-logs@example.com
+}
+
