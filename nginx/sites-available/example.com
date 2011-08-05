@@ -25,7 +25,7 @@ server {
         location ~* \.(jpg|jpeg|gif|png|ico|css|doc|exe|txt|js|swf|cur|tar)$ {
                 expires         7d;
                 root $www_root;
-                if (!-f ) {
+                if (!-f $request_filename) {
                         proxy_pass        http://apache;
                 }
         }
