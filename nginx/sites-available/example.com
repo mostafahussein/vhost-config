@@ -4,22 +4,32 @@ server {
         listen   www.example.com:80;
 
         proxy_intercept_errors on;
-        error_page 500 502 503 504 /50x.html;
+        proxy_intercept_errors on;
+        error_page 500 504 /50x.html;
+        error_page 503 502 /503.html;
+        error_page 404 /404.html;
         location = /50x.html {
                 root $www_root;
         }
 
-        error_page 404 /404.html;
+        location = /503.html {
+                root $www_root;
+        }
+
         location = /404.html {
                 root $www_root;
         }
 
         location ~ /\.(ht|svn|git) {
-                return 404;
+		internal;
         }
 
 	if ($http_user_agent ~ translate.google.com) {
 		return 444;
+	}
+
+	location /internal {
+		internal;
 	}
 
         location ~* \.(jpg|jpeg|gif|png|ico|css|doc|exe|txt|js|swf|cur|tar)$ {
