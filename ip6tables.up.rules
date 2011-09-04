@@ -1,0 +1,14 @@
+*filter
+:INPUT DROP [0:0]
+:FORWARD DROP [0:0]
+:OUTPUT ACCEPT [0:0]
+-A INPUT -i lo -j ACCEPT 
+# Link-Local addresses and Multicast
+#-A INPUT -s fe80::/10 -j ACCEPT
+#-A INPUT -s ff00::/8 -j ACCEPT
+-A INPUT -p ipv6-icmp -j ACCEPT
+-A INPUT -p tcp -m tcp --dport ssh -j ACCEPT
+-A INPUT -p tcp -m tcp --dport www -j ACCEPT
+-A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+-A OUTPUT -p tcp -m owner ! --uid-owner postfix -m multiport --dports 25,465 -j DROP 
+COMMIT

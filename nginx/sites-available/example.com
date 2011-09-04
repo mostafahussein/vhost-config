@@ -2,6 +2,7 @@ server {
         set $www_root "/home/example.com/www/htdocs";
         server_name www.example.com;
         listen   www.example.com:80;
+        #listen [::]:80;
 
         proxy_intercept_errors on;
         proxy_intercept_errors on;
