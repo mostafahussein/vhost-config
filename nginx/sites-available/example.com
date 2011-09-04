@@ -5,7 +5,6 @@ server {
         #listen [::]:80;
 
         proxy_intercept_errors on;
-        proxy_intercept_errors on;
         error_page 500 504 /50x.html;
         error_page 503 502 /503.html;
         error_page 404 /404.html;
