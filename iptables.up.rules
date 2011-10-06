@@ -20,6 +20,7 @@
 -A INPUT -p tcp -m tcp --dport ssmtp -j ACCEPT
 -A INPUT -p icmp -m icmp --icmp-type 8 -m limit --limit 1/sec -j ACCEPT
 -A INPUT -m state --state RELATED,ESTABLISHED -j ACCEPT
+-A OUTPUT -p tcp -d 127.0.0.0/8 --dport smtp -j ACCEPT
 -A OUTPUT -p tcp -m owner ! --uid-owner postfix -m multiport --dports 25,465 -j DROP
 -A OUTPUT -p udp -m owner ! --uid-owner postfix -m multiport --dports 25,465 -j DROP
 COMMIT
