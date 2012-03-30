@@ -4,6 +4,8 @@ server {
         listen   www.example.com:80;
         #listen [::]:80;
 
+        #include /etc/nginx/cloudflare.conf;
+
         proxy_intercept_errors on;
         error_page 500 504 /50x.html;
         error_page 503 502 /503.html;
