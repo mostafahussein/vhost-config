@@ -9,4 +9,7 @@ Installation is simple:
 
     # chmod 700 .git
 
+    # echo '*' > .git/info/exclude
+
     # git reset --hard
+
